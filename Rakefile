@@ -5,12 +5,16 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "timekeeper"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{Timekeeper. Keeping track of your time.}
+    gem.description = %Q{Timekeeper. Keeping track of your time.}
     gem.email = "koen@atog.be"
     gem.homepage = "http://github.com/atog/timekeeper"
     gem.authors = ["atog"]
     gem.add_development_dependency "thoughtbot-shoulda"
+    gem.files = FileList['lib/**/*.rb']
+    gem.test_files = []
+    gem.add_dependency('fastercsv', '>= 1.5.0')
+    gem.add_dependency('rufus-tokyo', '= 1.0.0')
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
 rescue LoadError

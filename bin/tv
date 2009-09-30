@@ -1,0 +1,74 @@
+#!/usr/bin/env ruby 
+# == Synopsis
+#
+# Timeviewer. Keeping an eye on your tracked time.
+#
+# == Usage
+#
+# tv [OPTIONS]
+#
+# -h, --help:
+#    show help
+#
+# --config [file]
+#     Location of your configuration file
+#
+# --name [name], -n [name]:
+#    Query by name
+#
+# --title [title], -t [title]:
+#     Query by title
+#
+# --target [target], -c [target]:
+#     Query by target
+#
+# --description [description], -m [description]
+#     Query by description
+#
+# --date [date], -d [date]
+#     Query by date
+#
+require File.dirname(__FILE__) + '/../lib/timekeeper'
+ 
+require "getoptlong"
+require "rdoc/usage"
+require "fastercsv"
+
+opts = GetoptLong.new(
+      [ "--help",       "-h", GetoptLong::NO_ARGUMENT ],
+      [ "--csv"             , GetoptLong::NO_ARGUMENT ],
+      [ "--all"             , GetoptLong::NO_ARGUMENT ],        
+      [ "--name",       "-n", GetoptLong::REQUIRED_ARGUMENT ],
+      [ "--title",      "-t", GetoptLong::REQUIRED_ARGUMENT ],
+      [ "--target",     "-c", GetoptLong::REQUIRED_ARGUMENT ],
+      [ "--time",       "-s", GetoptLong::REQUIRED_ARGUMENT ],
+      [ "--description","-m", GetoptLong::REQUIRED_ARGUMENT ],
+      [ "--date",       "-d", GetoptLong::REQUIRED_ARGUMENT ],
+      [ "--config"          , GetoptLong::REQUIRED_ARGUMENT ] 
+    )
+
+if ARGV.length == 0
+  puts "Please provide some options, type --help"
+  exit 0
+end
+
+tv = Timeviewer.new
+output = ""
+
+attributes = {}
+opts.each do |opt, arg|
+  case opt
+  when "--help": RDoc::usage
+  when "--csv" : output = "csv"
+  when "--config": tv.config arg
+  else
+    attributes.store(opt.gsub("-",""), arg)
+  end
+end
+
+records = tv.all
+if output == "csv"
+  tv.to_csv(records)
+else
+  puts records.collect{|r| Keep.new(r) }
+end
