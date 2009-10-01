@@ -22,7 +22,7 @@ class Timeviewer
   private
   
     def tables
-      @ts ||= config["team"].collect{|t| Rufus::Tokyo::Table.new(File.join(config["db_path"],"#{t}-time.tct"))}   
+      @tables ||= config["team"].collect{|t| Rufus::Tokyo::Table.new(File.join(config["db_path"],"#{t}-time.tct"))}   
     end
     
 end
