@@ -19,7 +19,7 @@ module Timekeeper
         case type.to_s
         when "csv"
           FasterCSV.open("#{name}.#{type}", "w") do |csv|    
-            csv << records[0].keys
+            csv << Keep::FIELDS
             records.each do |record|
               csv << record.values
             end

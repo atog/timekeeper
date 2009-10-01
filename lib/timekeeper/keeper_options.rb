@@ -12,6 +12,10 @@ module Timekeeper
         o.on("--config FILE", "location of your configuration file - default is ./timekeeper.yml") do |file|
           self[:config] = file
         end
+        
+        o.on('-n', '--name NAME', 'Who did it?') do |name|
+          self[:name] = name
+        end        
 
         o.on('-t', '--title TITLE', 'What do you want to register?') do |title|
           self[:title] = title
@@ -37,8 +41,12 @@ module Timekeeper
           self[:remove] = id
         end
         
-        o.on('--update ID', 'Remove a record.') do |id|
+        o.on('--update ID', 'Update a record.') do |id|
           self[:update] = id
+        end
+
+        o.on('--track ID', 'Track a record. Tracking should be enabled.') do |id|
+          self[:track] = id
         end
         
         o.on_tail('-h', '--help', 'Display this help and exit') do

@@ -12,9 +12,12 @@ module Timekeeper
           tk.delete(id)
         elsif id = options.delete(:update)
           tk.update(id, options)
-        else        
+        elsif id = options.delete(:track)
+          tk.track(id, options[:name]) if options[:name]
+        else
           tk.store(options)          
         end
+        tk.close
       else
         puts options.opts
       end
@@ -30,6 +33,7 @@ module Timekeeper
       else
         puts records
       end
+      tv.close
     end
     
   end

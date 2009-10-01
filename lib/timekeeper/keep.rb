@@ -1,8 +1,12 @@
 module Timekeeper
 
   class Keep
+    
+    FIELDS = %w(pk name target title date time description)
   
-    attr_accessor :name, :time, :title, :description, :target, :date, :pk
+    FIELDS.each do |field|
+      attr_accessor field
+    end
   
     def initialize(attributes)
       set_attributes(attributes)
@@ -29,6 +33,10 @@ module Timekeeper
     def to_hash
       {:name => name, :time => time, :title => title, :description => description,
         :target => target, :date => date}
+    end
+    
+    def values
+      [pk, name, target, title, date, time, description]
     end
   
     def to_s

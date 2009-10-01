@@ -17,8 +17,8 @@ module Timekeeper
           self[:output] = [(file || "timekeeper"), :csv]
         end        
         
-        o.on('-n', '--name NAME', 'Query on name') do |title|
-          self[:title] = title
+        o.on('-n', '--name NAME', 'Query on name') do |name|
+          self[:name] = name
         end        
 
         o.on('-t', '--title TITLE', 'Query on title') do |title|
