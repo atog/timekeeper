@@ -8,6 +8,10 @@ class Timeviewer
     tables.collect{|table| table.query}.flatten!
   end
   
+  def close
+    tables.each {|table| table.close}
+  end
+  
   def self.export(records, name="export", type= :csv)
     if records.any?
       case type

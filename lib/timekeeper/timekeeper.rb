@@ -12,6 +12,10 @@ class Timekeeper
     table.clear
   end
   
+  def close
+    table.close
+  end
+  
   def store(attributes)
     attributes.store("name", config["name"])
     attributes.store("date", Date.today) unless attributes["date"]

@@ -14,9 +14,9 @@ begin
     gem.files = FileList['lib/**/*.rb']
     gem.test_files = []
     gem.add_dependency('fastercsv', '>= 1.5.0')
-    gem.add_dependency('rufus-tokyo', '= 1.0.0')
-    Jeweler::GemcutterTasks.new
+    gem.add_dependency('rufus-tokyo', '= 1.0.0')    
   end
+  Jeweler::GemcutterTasks.new
 rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
 end
