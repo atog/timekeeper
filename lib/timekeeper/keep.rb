@@ -5,11 +5,11 @@ class Keep
   attr_accessor :name, :time, :title, :description, :target, :date, :pk, :track
   
   def initialize(attributes)
-    set_attributes(attributes) if attributes
+    set_attributes(attributes)
   end
   
   def update(attributes)
-    set_attributes(attributes) if attributes
+    set_attributes(attributes)
   end  
   
   def date=(value)
