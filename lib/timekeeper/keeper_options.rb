@@ -45,7 +45,7 @@ module Timekeeper
           self[:update] = id
         end
 
-        o.on('--track ID', 'Track a record. Tracking should be enabled.') do |id|
+        o.on('--track ID', 'Track a record.') do |id|
           self[:track] = id
         end
         

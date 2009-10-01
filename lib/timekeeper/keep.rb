@@ -2,7 +2,7 @@ module Timekeeper
 
   class Keep
     
-    FIELDS = %w(pk name target title date time description)
+    FIELDS = %w(pk name target title date time description tracked)
   
     FIELDS.each do |field|
       attr_accessor field
@@ -32,15 +32,15 @@ module Timekeeper
   
     def to_hash
       {:name => name, :time => time, :title => title, :description => description,
-        :target => target, :date => date}
+        :target => target, :date => date, :tracked => tracked}
     end
     
     def values
-      [pk, name, target, title, date, time, description]
+      [pk, name, target, title, date, time, description, tracked]
     end
   
     def to_s
-      "#{pk}|#{name}|#{target}|#{title}|#{description}|#{date}|#{time}"
+      "#{pk}|#{name}|#{target}|#{title}|#{description}|#{date}|#{time}|#{tracked}"
     end
   
     private

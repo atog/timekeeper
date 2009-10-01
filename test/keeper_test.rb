@@ -10,6 +10,16 @@ class KeeperTest < Test::Unit::TestCase
     assert_equal 2, t.count
   end
   
+  should "track a record" do
+    t = Keeper.new
+    t.delete_all
+    t.store(:name => "koen", :title => "development", :target => "some client or project", :date => Date.new, :time => 4)
+    t.store(:name => "koen", :title => "development", :target => "some client or project", :date => Date.new, :time => 4)
+    assert_equal 2, t.count
+    t.track(1, "koen")
+    t.track(2, "koen")    
+  end
+  
   should "update an existing element" do
     t = Keeper.new
     t.delete_all

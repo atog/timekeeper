@@ -41,11 +41,9 @@ module Timekeeper
     end
     
     def track(id, name)
-      if config["tracking"]
-        tracking_table = Rufus::Tokyo::Cabinet.new(File.join(config["db_path"],"tracking-time.tcb"))
-        tracking_table.putdup(name, id)
-        tracking_table.close
-      end
+      tracking_table = Rufus::Tokyo::Table.new(File.join(config["db_path"],"tracking-time.tct"))
+      tracking_table[tracking_table.genuid] = {:keep_id => id, :name => name}
+      tracking_table.close
     end
     
     private
