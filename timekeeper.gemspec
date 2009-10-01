@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["atog"]
-  s.date = %q{2009-09-30}
+  s.date = %q{2009-10-01}
   s.description = %q{Timekeeper. Keeping track of your time.}
   s.email = %q{koen@atog.be}
   s.executables = ["tk", "tv"]
@@ -28,11 +28,6 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.5}
   s.summary = %q{Timekeeper. Keeping track of your time.}
-  s.test_files = [
-    "test/test_helper.rb",
-     "test/timekeeper_test.rb",
-     "test/timeviewer_test.rb"
-  ]
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
