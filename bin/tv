@@ -53,13 +53,13 @@ if ARGV.length == 0
 end
 
 tv = Timeviewer.new
-output = ""
+output = nil
 
 attributes = {}
 opts.each do |opt, arg|
   case opt
   when "--help": RDoc::usage
-  when "--csv" : output = "csv"
+  when "--csv" : output = :csv
   when "--config": tv.config arg
   else
     attributes.store(opt.gsub("-",""), arg)
@@ -67,8 +67,8 @@ opts.each do |opt, arg|
 end
 
 records = tv.all
-if output == "csv"
-  tv.to_csv(records)
+if output
+  Timeviewer.export(records, "export", output)
 else
   puts records.collect{|r| Keep.new(r) }
 end

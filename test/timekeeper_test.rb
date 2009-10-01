@@ -33,4 +33,12 @@ class TimekeeperTest < Test::Unit::TestCase
     assert t.get(1).track
   end
   
+  should "raise an exception" do
+    t = Timekeeper.new
+    t.delete_all    
+    assert_raise StandardError do
+      t.store(:name => "koen", :target => "some client or project", :date => Date.new)
+    end
+  end
+  
 end

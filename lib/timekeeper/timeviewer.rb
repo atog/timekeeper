@@ -5,15 +5,18 @@ class Timeviewer
   end
 
   def all
-    tables.collect{|t| t.query.collect{|k| k} }.flatten!
+    tables.collect{|table| table.query}.flatten!
   end
   
-  def to_csv(records, file="export.csv")
+  def self.export(records, name="export", type= :csv)
     if records.any?
-      FasterCSV.open(file, "w") do |csv|    
-        csv << records[0].keys
-        records.each do |t|
-          csv << t.values
+      case type
+      when :csv
+        FasterCSV.open("#{name}.#{type}", "w") do |csv|    
+          csv << records[0].keys
+          records.each do |record|
+            csv << record.values
+          end
         end
       end
     end

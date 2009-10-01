@@ -6,8 +6,8 @@ class TimeviewerTest < Test::Unit::TestCase
     setup do
       t = Timekeeper.new
       t.delete_all
-      t.store(:name => "koen", :title => "development", :target => "some client or project", :date => Date.new, :time_spend => 4)
-      t.store(:name => "koen", :title => "development", :target => "some client or project", :date => "2009/09/01", :time_spend => 4)
+      t.store(:name => "koen", :title => "development", :target => "some client or project", :date => Date.new, :time => 4)
+      t.store(:name => "koen", :title => "development", :target => "some client or project", :date => "2009/09/01", :time => 4)
     end
     should "retrieve some time spend" do
       tv = Timeviewer.new
