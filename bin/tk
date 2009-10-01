@@ -1,68 +1,7 @@
 #!/usr/bin/env ruby 
-# == Synopsis
-#
-# Timekeeper. Keeping track of your time.
-#
-# == Usage
-#
-# tk [OPTIONS]
-#
-# -h, --help:
-#    show help
-#
-# --config [file]
-#     Location of your configuration file
-#
-# --title [title], -t [title]:
-#     What do you want to register
-#
-# --target [target], -c [target]:
-#     Who is going to pay?
-#
-# --time [time], -s [time]:
-#     How long did it take?
-#
-# --description [description], -m [description]
-#     More? You want to be more specific?
-#
-# --date [date], -d [date]
-#     When exactly did it happen?
-#
-# --remove [id]
-#     Remove a record.
-#
-require File.expand_path(File.dirname(__FILE__) + "/../lib/timekeeper")
+require 'rubygems'
 
-require "getoptlong"
-require "rdoc/usage"
+$LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
+require 'timekeeper'
 
-opts = GetoptLong.new(
-      [ "--help",       "-h", GetoptLong::NO_ARGUMENT ],
-      [ "--title",      "-t", GetoptLong::REQUIRED_ARGUMENT ],
-      [ "--target",     "-c", GetoptLong::REQUIRED_ARGUMENT ],
-      [ "--time",       "-s", GetoptLong::REQUIRED_ARGUMENT ],
-      [ "--description","-m", GetoptLong::REQUIRED_ARGUMENT ],
-      [ "--date",       "-d", GetoptLong::REQUIRED_ARGUMENT ],
-      [ "--remove"          , GetoptLong::REQUIRED_ARGUMENT ],
-      [ "--config"          , GetoptLong::REQUIRED_ARGUMENT ]   
-    )
-
-if ARGV.length == 0
-  puts "Please provide some options, type --help"
-  exit 0
-end
-
-tk = Timekeeper.new
-
-attributes = {}
-opts.each do |opt, arg|
-  case opt
-  when "--help": RDoc::usage
-  when "--config": tk.config arg
-  when "--remove": tk.delete(arg); exit 0
-  else 
-    attributes.store(opt.gsub("-",""), arg)
-  end
-end
-
-tk.store(attributes)
+Timekeeper::Runner.tk(ARGV)

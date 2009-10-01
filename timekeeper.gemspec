@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{timekeeper}
-  s.version = "0.1.0"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["atog"]
@@ -20,8 +20,11 @@ Gem::Specification.new do |s|
   s.files = [
     "lib/timekeeper.rb",
      "lib/timekeeper/keep.rb",
-     "lib/timekeeper/timekeeper.rb",
-     "lib/timekeeper/timeviewer.rb"
+     "lib/timekeeper/keeper.rb",
+     "lib/timekeeper/keeper_options.rb",
+     "lib/timekeeper/runner.rb",
+     "lib/timekeeper/viewer.rb",
+     "lib/timekeeper/viewer_options.rb"
   ]
   s.homepage = %q{http://github.com/atog/timekeeper}
   s.rdoc_options = ["--charset=UTF-8"]
