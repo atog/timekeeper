@@ -21,20 +21,20 @@ module Timekeeper
           self[:name] = name
         end        
 
-        o.on('-t', '--title TITLE', 'Query on title') do |title|
-          self[:title] = title
-        end
+        # o.on('-t', '--title TITLE', 'Query on title') do |title|
+        #   self[:title] = title
+        # end
 
-        o.on('-c', '--target TARGET', 'Query on target') do |target|
-          self[:target] = target
-        end
+        # o.on('-c', '--target TARGET', 'Query on target') do |target|
+        #   self[:target] = target
+        # end
 
-        o.on('-m', '--description DESCRIPTION', 'Query on description') do |description|
-          self[:description] = description
-        end
+        # o.on('-m', '--description DESCRIPTION', 'Query on description') do |description|
+        #   self[:description] = description
+        # end
 
-        o.on('-d', '--date DATE', 'Query on date') do |date|
-          self[:date] = date
+        o.on('--month [month]', 'Query on month') do |month|
+          self[:month] = month || Date.today.month
         end
 
         o.on_tail('-h', '--help', 'Display this help and exit') do

@@ -24,7 +24,7 @@ module Timekeeper
   
     def store(attributes)
       attributes.store(:name, config["name"])
-      attributes.store(:date, Date.today) unless attributes["date"]
+      attributes.store(:date, Date.today) unless (attributes["date"] || attributes[:date])
       table[table.genuid] = Keep.new(attributes).to_hash
     end
   

@@ -26,8 +26,16 @@ module Timekeeper
     def self.tv(args)
       options = ViewerOptions.new(args)
       tv = Viewer.new
-      tv.config(options.delete(:config)) if options[:config]      
-      records = tv.all
+      tv.config(options.delete(:config)) if options[:config]
+      records = begin
+        if options[:name]
+          tv.by_name(options[:name])
+        elsif options[:month]
+          tv.by_month(options[:month])
+        else
+          tv.all
+        end
+      end
       if output = options.delete(:output)
         Viewer.export(records, output[0], output[1])
       else

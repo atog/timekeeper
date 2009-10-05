@@ -5,15 +5,41 @@ module Timekeeper
     def config(file="timekeeper.yml")
       @config ||= YAML.load_file(file)
     end
+    
+    def by_month(m=nil)
+      today = Date.today
+      y, m = today.year, m || today.month
+      select{|q|
+        q.add "date", :starts_with, "#{y}-#{sprintf("%02d", m)}"
+      }.sort!{|x,y| y.date <=> x.date }
+    end
+    
+    def by_name(name)
+      select{|q|
+        q.add "name", :eq, name
+      }.sort!{|x,y| y.date <=> x.date }
+    end
+    
+    def select(&block)
+      tables.collect{|table|
+        table.query{|q|
+          yield q     
+        }.collect{|attrs|
+          keep = Keep.new(attrs)
+          keep.tracked = tracked?(keep.name, keep.pk)
+          keep
+        }
+      }.flatten
+    end
 
     def all
-      tables.collect{|table| 
+      tables.collect{|table|
         table.query.collect{|attrs|
           keep = Keep.new(attrs)
           keep.tracked = tracked?(keep.name, keep.pk)
           keep
         }
-      }.flatten!
+      }.flatten.sort!{|x,y| y.date <=> x.date }
     end
   
     def close
